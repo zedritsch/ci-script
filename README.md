@@ -1,9 +1,9 @@
 # CI-Script
 [Language Components](#language-components) | `128`
 --------------------------------------------|------
-[Keywords](#keywords)                       | `32`
+[Keywords](#keywords)                       | `24`
 [Operators](#operators)                     | `32`
-[System](#system)                           | `48`
+[System](#system)                           | `56`
 [Miscellaneous](#miscellaneous)             | `16`
 
 
@@ -27,17 +27,6 @@ Variables | `8`
 `const`   |
 `class`   |
 `func`    |
-
-Data Types | `8`
------------|----
-`void`     |
-`bool`     |
-`char`     |
-`int`      |
-`frac`     |
-`dec`      |
-`str`      |
-`date`     | FIXME: Delete and turn into `auto`?
 
 Statements | `8`
 -----------|----
@@ -65,7 +54,7 @@ Logical | `6`
 `>>`    | Shift right
 `^`     | Cross
 `&`     | And
-`|`     | Or
+`\|`    | Or
 `!`     | Not
 
 Arithmetic | `5`
@@ -97,17 +86,36 @@ Relational | `6`
 `>=`       | Greater Equal
 
 Other | `7`
-------|--------------------------------
-`$`   | Address
+------|--------------------
+`$`   | Address (Reference)
 `*`   | Pointer
 `->`  | Pointer Value
 `->`  | Iterator
-`=>`  | FIXME: Necessary?
-`?`   | FIXME: Really separate into two Parts?
-`:`   | FIXME: Really separate into two Parts?
+`?`   | Inline Value
+`?`   | Optional Variable
+`:`   | Type Specifier
 
 
 ### System
+Classes   | `16`
+----------|------------------------------------------------
+`auto`    | Will get a Type at build Time
+`void`    | No Type
+`bool`    | A single Bit
+`char`    | 1-64 Bit unsigned Integer
+`int`     | 1-64 Bit signed Integer
+`frac`    | 1-64 Bit unsigned Number (+ Decimal Point Bits)
+`dec`     | 1-64 Bit signed Number (+ Decimal Point Bits)
+`String`  | Character Array with extra Functionality
+`IO`      | FIXME: Not final
+`Process` | FIXME: Not final
+`6` More  | TODO
+
+Functions | `40`
+----------|-------------------------------
+`typeOf`  | Returns the Type of a Variable
+`sizeOf`  |
+`38` More | TODO
 
 
 ### Miscellaneous
@@ -130,8 +138,8 @@ Enclosures | `8`
 `"`        | String
 
 Separators | `4`
------------|-------------------
+-----------|------------------
 `.`        | Class Member
 `,`        | Parameter & Entry
-`:`        | Data Type Modifier
+`:`        | Value
 `;`        | Command
