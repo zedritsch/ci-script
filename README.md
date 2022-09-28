@@ -143,3 +143,22 @@ Separators | `4`
 `,`        | Parameter & Entry
 `:`        | Value
 `;`        | Command
+
+
+
+## Syntax Highlighting
+01. parameter - orange
+02. variable - light orange
+03. constant - dark orange
+
+04. keyword - dark red
+05. operator - light red
+06. function - light purple
+07. class - dark purple
+
+08. comment - gray
+
+09. literal - dark blue
+10. string - light blue
+
+other - white
