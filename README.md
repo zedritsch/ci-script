@@ -146,19 +146,36 @@ Separators | `4`
 
 
 
+## Compiler
+### Build Command
+```ps
+cis [{default}build(b)] FILENAME [OUTPUT] [{default}-m(/m), -s(/s), -l(/l)]
+```
+
+
+### Modes
+1. strict (s): Everything must be given/defined
+	`Console.log("Hello World!");`
+2. match  (m): The Code needs a clear Context
+	`Console.log "Hello World!"`
+3. loose  (l): Leaves Everything up to the Compiler
+	`Console log Hello World!`
+
+
+
 ## Syntax Highlighting
 01. parameter - orange
-02. variable - light orange
-03. constant - dark orange
+02. variable  - light orange
+03. constant  - dark orange
 
-04. keyword - dark red
-05. operator - light red
-06. function - light purple
-07. class - dark purple
+04. keyword   - dark red
+05. operator  - light red
+06. function  - light purple
+07. class     - dark purple
 
-08. comment - gray
+08. comment   - gray
 
-09. literal - dark blue
-10. string - light blue
+09. literal   - dark blue
+10. string    - light blue
 
-other - white
+    other     - white
