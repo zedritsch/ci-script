@@ -1,181 +1,182 @@
 # CI-Script
-[Language Components](#language-components) | `128`
+[Language Components](#language-components) | `64`
 --------------------------------------------|------
-[Keywords](#keywords)                       | `24`
+[Keywords](#keywords)                       | `16`
 [Operators](#operators)                     | `32`
-[System](#system)                           | `56`
-[Miscellaneous](#miscellaneous)             | `16`
+[Primitive Types](#primitive-types)         |  `6`
+[Constants](#constants)                     |  `4`
+[]()                                        |  `6`
 
+[Expressions](#expressions)   | E
+------------------------------|---
+[Storage](#storage)           |
+[Conditional](#conditional)   |
+[Loop Control](#loop-control) |
+[Flow Control](#flow-control) |
 
+[Compiler](#compiler) | C
+----------------------|---
+[Command](#command)   |
 
 ## Language Components
 ### Keywords
-Macros  | `4`
---------|----
-`#if`   |
-`#elif` |
-`#else` |
-`#end`  |
+Storage  | `6`
+---------|----
+`secret` |
+`async`  |
+`var`    |
+`const`  |
+`func`   |
+`struct` |
 
-Variables | `8`
-----------|----
-`import`  |
-`using`   |
-`pub`     |
-`pvt`     |
-`var`     |
-`const`   |
-`class`   |
-`func`    |
+Conditional | `2`
+------------|----
+`if`        |
+`else`      |
 
-Statements | `8`
------------|----
-`if`       |
-`else`     |
-`switch`   |
-`case`     |
-`other`    |
-`break`    |
-`skip`     |
-`return`   |
+Loop Control | `4`
+-------------|----
+`do`         |
+`while`      |
+`for`        |
+`in`         |
 
-Loops   | `4`
---------|----
-`for`   |
-`in`    |
-`do`    |
-`while` |
-
+Flow Control | `4`
+-------------|----
+`skip`       |
+`break`      |
+`await`      |
+`return`     |
 
 ### Operators
-Logical | `6`
---------|------------
-`<<`    | Shift left
-`>>`    | Shift right
-`^`     | Cross
-`&`     | And
-`\|`    | Or
+Logical | `8`
+--------|----
 `!`     | Not
+`&`     | And
+`\|`     | Or
+`^`     | Xor
+`<<`    | Shift Left
+`>>`    | Shift Right
+`++`    | `@` Increment
+`--`    | `@` Decrement
 
-Arithmetic | `5`
------------|---------------
-`+`        | Addition
-`-`        | Subtraction
-`*`        | Multiplication
-`/`        | Division
-`%`        | Modulus
+Arithmetic | `8`
+-----------|----
+`+`        | `@` Add
+`-`        | `@` Subtract
+`*`        | `@` Multiply
+`/`        | `@` Divide
+`%`        | `@` Modulo
+`**`       | `@` Exponate
+`//`       | `@` Root
+`%%`       | `@` Root Remainder
 
-Assignment | `8`
------------|----------
-`++`       | Increment
-`--`       | Decrement
-`=`        | Assign
-`+=`       | Add
-`-=`       | Subtract
-`*=`       | Multiply
-`/=`       | Divide
-`%=`       | Modulo
+Relational | `8`
+-----------|----
+`==`       | `@` Equal
+`!=`       | `@` Not Equal
+`<`        | `@` Smaller Than
+`>`        | `@` Greater Than
+`<=`       | `@` Smaller Equal
+`>=`       | `@` Greater Equal
+`&&`       | And
+`\|\|`       | Or
 
-Relational | `6`
------------|--------------
-`==`       | Equal
-`!=`       | Not Equal
-`<`        | Smaller
-`>`        | Greater
-`<=`       | Smaller Equal
-`>=`       | Greater Equal
+Other | `8`
+------|----
+`=`   | Assignment
+`..`  | Exclusive Range
+`.=`  | Inclusive Range
+`$`   | Reference (Variable Address)
+` `   | -> Iterator / Pointer Value?
+` `   | => Result / Switch Case?
+` `   | @ Variable At Address?
+` `   | ~ Destructor?
 
-Other | `7`
-------|--------------------
-`$`   | Address (Reference)
-`*`   | Pointer
-`->`  | Pointer Value
-`->`  | Iterator
-`?`   | Inline Value
-`?`   | Optional Variable
-`:`   | Type Specifier
+`@` marks an operator as overloadable
 
+### Primitive Types
+Primitive Types | `6`
+----------------|----
+`bool`          | Single Bit
+`int`           | Signed Integer
+`uint`          | Unsigned Integer
+`float`         | Signed Number
+`char`          | Unsigned Integer
+`string`        | Char Array
 
-### System
-Classes   | `16`
-----------|------------------------------------------------
-`auto`    | Will get a Type at build Time
-`void`    | No Type
-`bool`    | A single Bit
-`char`    | 1-64 Bit unsigned Integer
-`int`     | 1-64 Bit signed Integer
-`frac`    | 1-64 Bit unsigned Number (+ Decimal Point Bits)
-`dec`     | 1-64 Bit signed Number (+ Decimal Point Bits)
-`String`  | Character Array with extra Functionality
-`IO`      | FIXME: Not final
-`Process` | FIXME: Not final
-`6` More  | TODO
+### Constants
+Constants | `4`
+----------|----
+`this`    | Struct Instance Inside Definition
+`null`    | No Instance Of Variable
+`true`    | `1` Or Higher
+`false`   | `0` Or `null`
 
-Functions | `40`
-----------|-------------------------------
-`typeOf`  | Returns the Type of a Variable
-`sizeOf`  |
-`38` More | TODO
+### ???
+??? | `6`
+----|----
+` ` |
+` ` |
+` ` |
+` ` |
+` ` |
+` ` |
 
-
-### Miscellaneous
-Comments | `4`
----------|------------------
-`#`      | Line
-`/*`     | Block Start
-`*/`     | Block End
-`###`    | Block Start & End
-
-Enclosures | `8`
------------|------------------
-`(`        | Parameter & Value
-`)`        | Parameter & Value
-`[`        | Entry
-`]`        | Entry
-`{`        | Command
-`}`        | Command
-`'`        | Character
-`"`        | String
-
-Separators | `4`
------------|------------------
-`.`        | Class Member
-`,`        | Parameter & Entry
-`:`        | Value
-`;`        | Command
-
-
-
-## Compiler
-### Build Command
-```ps
-cis [{default}build(b)] FILENAME [OUTPUT] [{default}-m(/m), -s(/s), -l(/l)]
+## Expressions
+### Storage
+```
+[secret ][(const|var) ]<identifier>[: <type>][ = <value>][;]
+```
+```
+[secret ][async ]func <identifier>([<parameter>[, <parameter>]*])[: <type>][[ {]
+	<function_body>
+[}]][;]
+```
+```
+[secret ]struct [<identifier>[: <type>]][[ {]
+	<structure_body>
+[}]][;]
 ```
 
+### Conditional
+```
+if <condition>[[ (&&|||) <condition>]*][ {]
+	<if_body>
+[}][;]
+[else[ {]
+	<else_body>
+[}][;]]
+```
 
-### Modes
-1. strict (s): Everything must be given/defined
-	`Console.log("Hello World!");`
-2. match  (m): The Code needs a clear Context
-	`Console.log "Hello World!"`
-3. loose  (l): Leaves Everything up to the Compiler
-	`Console log Hello World!`
+### Loop Control
+```
+[do ]while <condition>[[ (&&|||) <condition>]*][ {]
+	<while_body>
+[}][;]
+```
+```
+[do ]for <identifier> in <value>[ {]
+	<for_body>
+[}][;]
+```
 
+### Flow Control
+```
+skip[ <value>][;]
+```
+```
+break[ <value>][;]
+```
+```
+await <value>[;]
+```
+```
+return[ <value>][;]
+```
 
-
-## Syntax Highlighting
-01. parameter - orange
-02. variable  - light orange
-03. constant  - dark orange
-
-04. keyword   - dark red
-05. operator  - light red
-06. function  - light purple
-07. class     - dark purple
-
-08. comment   - gray
-
-09. literal   - dark blue
-10. string    - light blue
-
-    other     - white
+## Compiler
+### Command
+```
+cis[ (<filename>|/lsp)]
+```
