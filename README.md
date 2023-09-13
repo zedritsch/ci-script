@@ -1,182 +1,163 @@
 # CI-Script
-[Language Components](#language-components) | `64`
---------------------------------------------|------
-[Keywords](#keywords)                       | `16`
-[Operators](#operators)                     | `32`
-[Primitive Types](#primitive-types)         |  `6`
-[Constants](#constants)                     |  `4`
-[]()                                        |  `6`
+[Components](#components)             | `64`
+--------------------------------------|------
+[Keywords](#keywords)                 | `16`
+[Operators](#operators)               | `32`
+[Primitive Types](#primitive-types)   |  `6`
+[Constants](#constants)               |  `2`
+[Standard Library](#standard-library) |  `8`
 
-[Expressions](#expressions)   | E
-------------------------------|---
-[Storage](#storage)           |
-[Conditional](#conditional)   |
-[Loop Control](#loop-control) |
-[Flow Control](#flow-control) |
+[Syntax](#syntax)                     | S
+--------------------------------------|---
+[Declarations](#declarations)         |
+[Statements](#statements)             |
 
-[Compiler](#compiler) | C
-----------------------|---
-[Command](#command)   |
+[Compiler](#compiler)                 | C
+--------------------------------------|---
+[Command](#command)                   |
 
-## Language Components
+## Components
 ### Keywords
-Storage  | `6`
----------|----
-`secret` |
-`async`  |
-`var`    |
-`const`  |
-`func`   |
-`struct` |
+Storage Modifer | `4`
+----------------|----
+`pub`           | Makes the storage visible to the outside of a structure
+`mut`           | Sets a variable to be mutable
+`async`         | Specifies that the function will be executed asynchronously
+`in`            | Makes the variable an iterator
 
-Conditional | `2`
-------------|----
-`if`        |
-`else`      |
+Storage Type    | `4`
+----------------|----
+`const`         | Stores a value, which is known at compile time
+`var`           | Stores a value, which doesn't have to be known at compile time
+`struct`        | Holds variables of different types under a single name
+`func`          | Contains a code snippet, which can be called from multiple places
 
-Loop Control | `4`
--------------|----
-`do`         |
-`while`      |
-`for`        |
-`in`         |
+Conditional     | `4`
+----------------|----
+`if`            | Evaluates the expression and if true, statements inside the body are executed
+`do`            | Skips the first evaluation of a loop or the given number of evaluations
+`while`         | Evaluates the expression and while true, statements inside the body are executed
+`for`           | Traverse through an array
 
-Flow Control | `4`
--------------|----
-`skip`       |
-`break`      |
-`await`      |
-`return`     |
+Flow Control    | `4`
+----------------|----
+`skip`          | Skips the current iteration or the given number of iterations
+`break`         | Terminates the innermost loop or the given number of loops
+`await`         | Makes the thread wait for an asynchronous function to finish
+`return`        | Terminates the function and returns a value if given
 
 ### Operators
-Logical | `8`
---------|----
-`!`     | Not
-`&`     | And
-`\|`     | Or
-`^`     | Xor
-`<<`    | Shift Left
-`>>`    | Shift Right
-`++`    | `@` Increment
-`--`    | `@` Decrement
+Logical    | `8`
+-----------|----
+`!`        | NOT
+`&`        | AND
+`\|`       | OR
+`^`        | XOR
+`<<`       | Shift Left
+`>>`       | Shift Right
+`<-`       | Rotate Left
+`->`       | Rotate Right
 
 Arithmetic | `8`
 -----------|----
-`+`        | `@` Add
-`-`        | `@` Subtract
-`*`        | `@` Multiply
-`/`        | `@` Divide
-`%`        | `@` Modulo
-`**`       | `@` Exponate
-`//`       | `@` Root
-`%%`       | `@` Root Remainder
+`+`        | Add
+`-`        | Subtract
+`*`        | Multiply
+`/`        | Divide
+`%`        | Modulo
+`**`       | Exponate
+`//`       | Root
+`%%`       | Root Remainder
 
 Relational | `8`
 -----------|----
-`==`       | `@` Equal
-`!=`       | `@` Not Equal
-`<`        | `@` Smaller Than
-`>`        | `@` Greater Than
-`<=`       | `@` Smaller Equal
-`>=`       | `@` Greater Equal
-`&&`       | And
-`\|\|`       | Or
+`==`       | Equal
+`!=`       | Not Equal
+`<`        | Smaller Than
+`>`        | Greater Than
+`<=`       | Smaller Or Equal
+`>=`       | Greater Or Equal
+`&&`       | AND
+`\|\|`     | OR
 
-Other | `8`
-------|----
-`=`   | Assignment
-`..`  | Exclusive Range
-`.=`  | Inclusive Range
-`$`   | Reference (Variable Address)
-` `   | -> Iterator / Pointer Value?
-` `   | => Result / Switch Case?
-` `   | @ Variable At Address?
-` `   | ~ Destructor?
+Other      | `8`
+-----------|----
+`=`        | Assignment
+`?!`       | Conditional (Ternary)
+`++`       | Increment
+`--`       | Decrement
+`..`       | Exclusive Range
+`.=`       | Inclusive Range
+`$`        | Reference (Address)
+`@`        | Value At Reference
 
-`@` marks an operator as overloadable
+NOTE: Almost every operator can be combined with the assignment operator (e.g. `<identifier> += <expression>`)
 
 ### Primitive Types
 Primitive Types | `6`
 ----------------|----
-`bool`          | Single Bit
-`int`           | Signed Integer
-`uint`          | Unsigned Integer
-`float`         | Signed Number
-`char`          | Unsigned Integer
-`string`        | Char Array
+`bool`          |
+`int`           |
+`uint`          |
+`float`         |
+`char`          |
+`str`           |
 
 ### Constants
-Constants | `4`
+Constants | `2`
 ----------|----
-`this`    | Struct Instance Inside Definition
-`null`    | No Instance Of Variable
 `true`    | `1` Or Higher
-`false`   | `0` Or `null`
+`false`   | `0`
 
-### ???
-??? | `6`
-----|----
-` ` |
-` ` |
-` ` |
-` ` |
-` ` |
-` ` |
+### Standard Library
+Standard Library | `8`
+-----------------|----
+` `              |
+` `              |
+` `              |
+` `              |
+` `              |
+` `              |
 
-## Expressions
-### Storage
+## Syntax
+### Declarations
 ```
-[secret ][(const|var) ]<identifier>[: <type>][ = <value>][;]
-```
-```
-[secret ][async ]func <identifier>([<parameter>[, <parameter>]*])[: <type>][[ {]
-	<function_body>
-[}]][;]
-```
-```
-[secret ]struct [<identifier>[: <type>]][[ {]
-	<structure_body>
-[}]][;]
-```
+[pub ]const <identifier>[: <type>] = <expression>;
 
-### Conditional
-```
-if <condition>[[ (&&|||) <condition>]*][ {]
-	<if_body>
-[}][;]
-[else[ {]
-	<else_body>
-[}][;]]
+[pub ][mut ]var <identifier>[: <type>][ = [await ]<expression>];
+
+[pub ]struct [<identifier>] {
+	# Code
+}
+
+[pub ][async ]func <identifier>([[mut ]<identifier>[: <type>][ = <expression>][, ...]])[: <type>] {
+	# Code
+}
 ```
 
-### Loop Control
+### Statements
 ```
-[do ]while <condition>[[ (&&|||) <condition>]*][ {]
-	<while_body>
-[}][;]
-```
-```
-[do ]for <identifier> in <value>[ {]
-	<for_body>
-[}][;]
-```
+if <expression>[ (&&|||) ...] {
+	# Code
+}
 
-### Flow Control
-```
-skip[ <value>][;]
-```
-```
-break[ <value>][;]
-```
-```
-await <value>[;]
-```
-```
-return[ <value>][;]
+[do [<expression>]]while <expression>[ (&&|||) ...] {
+	# Code
+}
+
+[do [<expression>]]for [mut ]<identifier>[: <type>] in <expression> {
+	# Code
+}
+
+skip[ <expression>];
+
+break[ <expression>];
+
+return[ <expression>];
 ```
 
 ## Compiler
 ### Command
 ```
-cis[ (<filename>|/lsp)]
+cis[ ([/b] <filename>|/lsp)]
 ```
