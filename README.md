@@ -3,8 +3,8 @@
 --------------------------------------|------
 [Keywords](#keywords)                 | `16`
 [Operators](#operators)               | `32`
-[Primitive Types](#primitive-types)   |  `6`
 [Constants](#constants)               |  `2`
+[Primitive Types](#primitive-types)   |  `6`
 [Standard Library](#standard-library) |  `8`
 
 [Syntax](#syntax)                     | S
@@ -12,9 +12,9 @@
 [Declarations](#declarations)         |
 [Statements](#statements)             |
 
-[Compiler](#compiler)                 | C
+[Toolchain](#toolchain)               | T
 --------------------------------------|---
-[Command](#command)                   |
+[Commands](#commands)                 |
 
 ## Components
 ### Keywords
@@ -35,9 +35,9 @@ Storage Type    | `4`
 Conditional     | `4`
 ----------------|----
 `if`            | Evaluates the expression and if true, statements inside the body are executed
-`do`            | Skips the first evaluation of a loop or the given number of evaluations
-`while`         | Evaluates the expression and while true, statements inside the body are executed
 `for`           | Traverse through an array
+`while`         | Evaluates the expression and while true, statements inside the body are executed
+`until`         | Statements inside the body are executed and repeated until the expression is false
 
 Flow Control    | `4`
 ----------------|----
@@ -52,22 +52,22 @@ Logical    | `8`
 `!`        | NOT
 `&`        | AND
 `\|`       | OR
-`^`        | XOR
+`~`        | XOR
 `<<`       | Shift Left
 `>>`       | Shift Right
-`<-`       | Rotate Left
-`->`       | Rotate Right
+`<~`       | Rotate Left
+`~>`       | Rotate Right
 
 Arithmetic | `8`
 -----------|----
+`++`       | Increment
+`--`       | Decrement
 `+`        | Add
 `-`        | Subtract
 `*`        | Multiply
 `/`        | Divide
 `%`        | Modulo
-`**`       | Exponate
-`//`       | Root
-`%%`       | Root Remainder
+`^`        | Exponate
 
 Relational | `8`
 -----------|----
@@ -84,14 +84,20 @@ Other      | `8`
 -----------|----
 `=`        | Assignment
 `?!`       | Conditional (Ternary)
-`++`       | Increment
-`--`       | Decrement
 `..`       | Exclusive Range
 `.=`       | Inclusive Range
 `$`        | Reference (Address)
 `@`        | Value At Reference
+`__`       |
+`__`       |
 
 NOTE: Almost every operator can be combined with the assignment operator (e.g. `<identifier> += <expression>`)
+
+### Constants
+Constants | `2`
+----------|----
+`true`    | `1` Or Higher
+`false`   | `0`
 
 ### Primitive Types
 Primitive Types | `6`
@@ -103,21 +109,17 @@ Primitive Types | `6`
 `char`          |
 `str`           |
 
-### Constants
-Constants | `2`
-----------|----
-`true`    | `1` Or Higher
-`false`   | `0`
-
 ### Standard Library
 Standard Library | `8`
 -----------------|----
-` `              |
-` `              |
-` `              |
-` `              |
-` `              |
-` `              |
+`stddef`         |
+`stdios`         |
+`stdfss`         |
+`stdgui`         |
+`stdmem`         |
+`stdcon`         |
+`stddev`         |
+`stdsys`         |
 
 ## Syntax
 ### Declarations
@@ -137,27 +139,19 @@ Standard Library | `8`
 
 ### Statements
 ```
-if <expression>[ (&&|||) ...] {
+(if|while|until) <expression>[ (&&|||) ...] {
 	# Code
 }
 
-[do [<expression>]]while <expression>[ (&&|||) ...] {
+for [mut ]<identifier>[: <type>] in <expression> {
 	# Code
 }
 
-[do [<expression>]]for [mut ]<identifier>[: <type>] in <expression> {
-	# Code
-}
-
-skip[ <expression>];
-
-break[ <expression>];
-
-return[ <expression>];
+(skip|break|return)[ <expression>];
 ```
 
-## Compiler
-### Command
+## Toolchain
+### Commands
 ```
 cis[ ([/b] <filename>|/lsp)]
 ```
