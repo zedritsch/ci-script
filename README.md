@@ -1,50 +1,60 @@
 # CI-Script
-[Components](#components)             | `64`
---------------------------------------|------
-[Keywords](#keywords)                 | `16`
-[Operators](#operators)               | `32`
-[Constants](#constants)               |  `2`
-[Primitive Types](#primitive-types)   |  `6`
-[Standard Library](#standard-library) |  `8`
-
-[Syntax](#syntax)                     | S
---------------------------------------|---
-[Declarations](#declarations)         |
-[Statements](#statements)             |
-
-[Toolchain](#toolchain)               | T
---------------------------------------|---
-[Commands](#commands)                 |
+Minimalistic hobby programming language
 
 ## Components
 ### Keywords
-Storage Modifer | `4`
-----------------|----
-`pub`           | Makes the storage visible to the outside of a structure
-`mut`           | Sets a variable to be mutable
-`async`         | Specifies that the function will be executed asynchronously
-`in`            | Makes the variable an iterator
+Directive        | `2`
+-----------------|----
+`import`         |
+`from`           |
 
-Storage Type    | `4`
-----------------|----
-`const`         | Stores a value, which is known at compile time
-`var`           | Stores a value, which doesn't have to be known at compile time
-`struct`        | Holds variables of different types under a single name
-`func`          | Contains a code snippet, which can be called from multiple places
+Storage Modifier | `4`
+-----------------|----
+`export`         |
+`mut`            | Mutable storage
+`async`          | Specifies that the function will be executed asynchronously
+`in`             | Traverse through an array
 
-Conditional     | `4`
-----------------|----
-`if`            | Evaluates the expression and if true, statements inside the body are executed
-`for`           | Traverse through an array
-`while`         | Evaluates the expression and while true, statements inside the body are executed
-`until`         | Statements inside the body are executed and repeated until the expression is false
+Storage Type     | `6`
+-----------------|----
+`module`         |
+`enum`           |
+`struct`         |
+`const`          | An identifier can be declared constant
+`var`            | Variable declaration
+`func`           | Function declaration
 
-Flow Control    | `4`
-----------------|----
-`skip`          | Skips the current iteration or the given number of iterations
-`break`         | Terminates the innermost loop or the given number of loops
-`await`         | Makes the thread wait for an asynchronous function to finish
-`return`        | Terminates the function and returns a value if given
+Conditional      | `4`
+-----------------|----
+`if`             | 0 or 1; Evaluates the expression and if true, statements inside the body are executed
+`not`            |
+`while`          | 0 to n; Evaluates the expression and while true, statements inside the body are executed
+`for`            | just n; Used when the number of iterations is known
+
+Flow Control     | `4`
+-----------------|----
+`skip`           | Skips the statements after it inside the loop for the iteration
+`break`          | Terminates the innermost loop immediately when it's encountered
+`await`          | Makes the program wait for an asynchronous function to finish
+`return`         | The return keyword terminates the function and returns the value
+
+Constants        | `4`
+-----------------|----
+`true`           | Boolean true
+`false`          | Boolean false
+`this`           |
+`null`           |
+
+Primitive Types  | `8`
+-----------------|----
+`void`           |
+`bool`           | Boolean
+`i32`            | Integers are whole numbers that can have both zero, positive and negative values
+`u32`            | Allows for storage of only positive numbers
+`f32`            | Used to hold real numbers
+`char`           | Keyword char is used for declaring character type variables
+`str`            | String
+`auto`           |
 
 ### Operators
 Logical    | `8`
@@ -62,96 +72,76 @@ Arithmetic | `8`
 -----------|----
 `++`       | Increment
 `--`       | Decrement
-`+`        | Add
-`-`        | Subtract
-`*`        | Multiply
-`/`        | Divide
-`%`        | Modulo
-`^`        | Exponate
+`+`        | Addition
+`-`        | Subtraction
+`*`        | Multiplication
+`/`        | Division
+`%`        | Modulus
+`^`        | Exponentiation
 
 Relational | `8`
 -----------|----
-`==`       | Equal
-`!=`       | Not Equal
-`<`        | Smaller Than
-`>`        | Greater Than
-`<=`       | Smaller Or Equal
-`>=`       | Greater Or Equal
-`&&`       | AND
-`\|\|`     | OR
+`==`       | Equality
+`!=`       | Inequality
+`<`        | Less than
+`>`        | Greater than
+`<=`       | Less than or equal to
+`>=`       | Greater than or equal to
+`&&`       | Conditional AND
+`\|\|`     | Conditional OR
 
 Other      | `8`
 -----------|----
 `=`        | Assignment
-`?!`       | Conditional (Ternary)
-`..`       | Exclusive Range
-`.=`       | Inclusive Range
+`?`        | Optional Type
 `$`        | Reference (Address)
-`@`        | Value At Reference
-`__`       |
-`__`       |
+`@`        | Value at reference
+`..`       | Exclusive range
+`.=`       | Inclusive range
+`?!`       | Conditional (ternary)
+`~~`       |
 
 NOTE: Almost every operator can be combined with the assignment operator (e.g. `<identifier> += <expression>`)
 
-### Constants
-Constants | `2`
-----------|----
-`true`    | `1` Or Higher
-`false`   | `0`
-
-### Primitive Types
-Primitive Types | `6`
-----------------|----
-`bool`          |
-`int`           |
-`uint`          |
-`float`         |
-`char`          |
-`str`           |
-
-### Standard Library
-Standard Library | `8`
------------------|----
-`stddef`         |
-`stdios`         |
-`stdfss`         |
-`stdgui`         |
-`stdmem`         |
-`stdcon`         |
-`stddev`         |
-`stdsys`         |
-
 ## Syntax
 ### Declarations
-```
-[pub ]const <identifier>[: <type>] = <expression>;
-
-[pub ][mut ]var <identifier>[: <type>][ = [await ]<expression>];
-
-[pub ]struct [<identifier>] {
+```cis
+[public ]module {
 	# Code
 }
 
-[pub ][async ]func <identifier>([[mut ]<identifier>[: <type>][ = <expression>][, ...]])[: <type>] {
+[public ]enum <Enumerator> {
+	(<MEMBER>[: <Type>][ = <EXPRESSION>])[; ...]
+}
+
+[public ]struct <Structure> {
+	([mut ]<member>(: <Type>[?]|[: <Type>[?]] = <expression>))[; ...]
+}
+
+[public ]const <CONSTANT>[: <Type>] = <EXPRESSION>;
+
+[public ][mut ]var <variable>[: <Type>[?]][ = <expression>];
+
+[public ][async ]func <function(([mut ]parameter[: <Type>[?]][ = <expression>])[, ...])>[: <Type>[?]] {
 	# Code
 }
 ```
 
 ### Statements
-```
-(if|while|until) <expression>[ (&&|||) ...] {
+```cis
+import <content>[, ...] from <"path">;
+
+(if|while)[ not] <expression> {
 	# Code
 }
 
-for [mut ]<identifier>[: <type>] in <expression> {
+for [mut ]<variable> in <expression> {
 	# Code
 }
 
-(skip|break|return)[ <expression>];
-```
+(skip|return)[ <expression>];
 
-## Toolchain
-### Commands
-```
-cis[ ([/b] <filename>|/lsp)]
+break[ <EXPRESSION>];
+
+await <expression>;
 ```

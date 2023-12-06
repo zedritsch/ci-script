@@ -1,0 +1,25 @@
+/* Block Comment */
+/* /* Nested Comment */ */
+/* `Code Block` Comment */
+# Line Comment
+
+import from export mut async in
+module enum struct const var func
+if not while for
+skip break await return
+true false this null
+void bool i32 u32 f32 char str auto
+
+! & | ~ << >> <~ ~>
+++ -- + - * / % ^
+== != < > <= >= && ||
+= ? $ @ .. .= ?! ~~
+
+123_456_789 (-123_456_789)
+0x123456789_ABCDEF_abcdef 0o1234567 0b01
+123_456.789 (-123_456.789)
+
+'0' '\0'
+"" "Hello there\0" "Hi, { "Peter" }!"
+
+0_identifier_0
