@@ -2,46 +2,56 @@
 Minimalistic hobby programming language
 
 ## Components
+Comments   | `4`
+-----------|----
+`#`        | Line comment
+`/*`       | Block comment start
+`*/`       | Block comment end
+`\``       | Documentation in comment
+
 ### Keywords
-Directive        | `2`
+Directive        | `4`
 -----------------|----
-`import`         |
-`from`           |
+`import`         | Specify identifiers to import
+`from`           | Specify from where to import
+`export`         | Make identifiers visible to other modules
+`module`         | Hold source code
 
-Storage Modifier | `4`
+Storage Modifier | `2`
 -----------------|----
-`export`         |
-`mut`            | Mutable storage
-`async`          | Specifies that the function will be executed asynchronously
-`in`             | Traverse through an array
+`mut`            | Make variables able to change thier state
+`async`          | Make functions able to spawn a new thread
 
-Storage Type     | `6`
+Storage Type     | `5`
 -----------------|----
-`module`         |
-`enum`           |
-`struct`         |
-`const`          | An identifier can be declared constant
-`var`            | Variable declaration
-`func`           | Function declaration
+`enum`           | Group many values in a single place
+`struct`         | Group variables under a single name
+`const`          | Value which is known at compile time
+`var`            | Value that could be known at runtime
+`func`           | Code block which can be called later
 
-Conditional      | `4`
+Conditional      | `5`
 -----------------|----
-`if`             | 0 or 1; Evaluates the expression and if true, statements inside the body are executed
+`if`             | Code block which executes when the given expression isn't false or null
+`while`          | Code block which executes as long as the expression isn't false or null
 `not`            |
-`while`          | 0 to n; Evaluates the expression and while true, statements inside the body are executed
-`for`            | just n; Used when the number of iterations is known
+`for`            | Code block which executes iterates through each element of a collection
+`in`             |
 
 Flow Control     | `4`
 -----------------|----
-`skip`           | Skips the statements after it inside the loop for the iteration
-`break`          | Terminates the innermost loop immediately when it's encountered
-`await`          | Makes the program wait for an asynchronous function to finish
-`return`         | The return keyword terminates the function and returns the value
+`skip`           | Skips one or a given number of iterations
+`break`          | Terminates one or a given number of loops
+`await`          | Joins two separate threads together
+`return`         | Returns a value if given and terminates tue function
 
-Constants        | `4`
+Constants        | `2`
 -----------------|----
 `true`           | Boolean true
 `false`          | Boolean false
+
+Constructs       | `2`
+-----------------|----
 `this`           |
 `null`           |
 
@@ -101,7 +111,24 @@ Other      | `8`
 `?!`       | Conditional (ternary)
 `~~`       |
 
-NOTE: Almost every operator can be combined with the assignment operator (e.g. `<identifier> += <expression>`)
+### Punctuation
+Definition | `8`
+-----------|----
+`(`        |
+`)`        |
+`[`        |
+`]`        |
+`{`        |
+`}`        |
+`'`        |
+`"`        |
+
+Separator  | `4`
+-----------|----
+`.`        |
+`,`        |
+`:`        |
+`;`        |
 
 ## Syntax
 ### Declarations
