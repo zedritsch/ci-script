@@ -1,25 +1,28 @@
-/* Block Comment */
-/* /* Nested Comment */ */
-/* `Code Block` Comment */
-# Line Comment
+### ` 0 ` ### # Comments    # 2
 
-import from export mut async in
-module enum struct const var func
-if not while for
-skip break await return
-true false this null
-void bool i32 u32 f32 char str auto
+!  &   |  ~   << >>  <~ ~>  # 8
+++ --  +  -   *  /   %  ^   # 16
+== !=  <  >   <= >=  && ||  # 24
+=  ?   $  @   .. .=  ?! =>  # 32
 
-! & | ~ << >> <~ ~>
-++ -- + - * / % ^
-== != < > <= >= && ||
-= ? $ @ .. .= ?! ~~
+import enum   struct const  # 4
+mut    var    async  func   # 8
+if     not    await  return # 12
+for    in     while  break  # 16
+export this   null   skip   # 20
+true   false  void   auto   # 24
 
-123_456_789 (-123_456_789)
-0x123456789_ABCDEF_abcdef 0o1234567 0b01
-123_456.789 (-123_456.789)
+bool   u32    i32    f32    # 4
+u8     u16    u64    u128   # 8
+i8     i16    i64    i128   # 12
+f64    f128   char   str    # 16
 
-'0' '\0'
-"" "Hello there\0" "Hi, { "Peter" }!"
+.      ,      :      ;      # 4
+'' ""  (  )   [  ]   {  }   # 12
 
-0_identifier_0
+123_456.789 (-123_456.789)  # 2
+0x123456789ABCDEF_abc_def_0 # 4
+0o1234567 0b1 (-0o7) (-0b1) # 8
+
+'0' '\0' ""                 # 1
+"Hello there\n" "{ "Hi" }!" # 2
