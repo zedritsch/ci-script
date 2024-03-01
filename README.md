@@ -91,7 +91,7 @@ Other      | `8`
 `$`        | Reference (Variable can be mutated by the given function)
 `@`        | Copy (The variable's value is passed to the given function)
 `..`       | Exclusive range (`0..2` => `[0, 1]`)
-`.=`       | Inclusive range (`0..2` => `[0, 1, 2]`)
+`.=`       | Inclusive range (`0.=2` => `[0, 1, 2]`)
 `?!`       | Conditional (Ternary)
 `=>`       | Function literal (Only available if I add function callbacks)
 
