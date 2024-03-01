@@ -2,81 +2,65 @@
 Minimalistic hobby programming language
 
 ## Components
-Comments   | `4`
------------|----
-`#`        | Line comment
-`/*`       | Block comment start
-`*/`       | Block comment end
-`\``       | Documentation in comment
+Comments    | `2`
+------------|----
+`#`         | Line comment
+`###` `###` | Block comment
 
 ### Keywords
-Directive        | `4`
+Directive        | `2`
 -----------------|----
-`import`         | Specify identifiers to import
-`from`           | Specify from where to import
-`export`         | Make identifiers visible to other modules
-`module`         | Hold source code
+`import`         | Includes the given module's definitions into another module
+`export`         | Grands other modules access to the storage type after it
 
 Storage Modifier | `2`
 -----------------|----
-`mut`            | Make variables able to change thier state
-`async`          | Make functions able to spawn a new thread
+`mut`            | Makes variables able to change their state
+`async`          | Enables creation of a new thread/coroutine on function call
 
 Storage Type     | `5`
 -----------------|----
-`enum`           | Group many values in a single place
-`struct`         | Group variables under a single name
+`enum`           | Namespace for multiple values known at compile time
+`struct`         | Namespace for multiple variables
 `const`          | Value which is known at compile time
 `var`            | Value that could be known at runtime
-`func`           | Code block which can be called later
+`func`           | Callable code block
 
 Conditional      | `5`
 -----------------|----
-`if`             | Code block which executes when the given expression isn't false or null
-`while`          | Code block which executes as long as the expression isn't false or null
-`not`            |
-`for`            | Code block which executes iterates through each element of a collection
-`in`             |
+`if`             | Code block which executes when the given expression doesn't evaluate to `false` or `null`
+`while`          | Code block which executes as long as the given expression doesn't evaluate to `false` or `null`
+`not`            | Modifies an expression to evaluate `true` instead of `false` or `null`
+`for`            | Code block which executes through an iteration of a collection
+`in`             | Makes the value of the current iteration available inside the for loop
 
 Flow Control     | `4`
 -----------------|----
 `skip`           | Skips one or a given number of iterations
-`break`          | Terminates one or a given number of loops
-`await`          | Joins two separate threads together
-`return`         | Returns a value if given and terminates tue function
+`break`          | Terminates one or a at compile time known number of loops
+`await`          | Joins two separate threads/coroutines together
+`return`         | Returns a value if given and terminates the function
 
-Constants        | `2`
+Constructs       | `6`
 -----------------|----
-`true`           | Boolean true
-`false`          | Boolean false
-
-Constructs       | `2`
------------------|----
-`this`           |
-`null`           |
-
-Primitive Types  | `8`
------------------|----
-`void`           |
-`bool`           | Boolean
-`i32`            | Integers are whole numbers that can have both zero, positive and negative values
-`u32`            | Allows for storage of only positive numbers
-`f32`            | Used to hold real numbers
-`char`           | Keyword char is used for declaring character type variables
-`str`            | String
-`auto`           |
+`true`           | Evaluates but is not equal to `1`
+`false`          | Evaluates but is not equal to `0`
+`this`           | Accesses a global variable/constant with the same name as a local variable/constant
+`null`           | Represents the absence of a value. Evaluates but is not equal to `0` or `false`
+`void`           | Makes a function not return a value
+`auto`           | Represents a type known at compile time
 
 ### Operators
 Logical    | `8`
 -----------|----
-`!`        | NOT
+`!`        | NOT (Complement)
 `&`        | AND
 `\|`       | OR
 `~`        | XOR
-`<<`       | Shift Left
-`>>`       | Shift Right
-`<~`       | Rotate Left
-`~>`       | Rotate Right
+`<<`       | Left Shift
+`>>`       | Right Shift
+`<~`       | Left Rotate
+`~>`       | Right Rotate
 
 Arithmetic | `8`
 -----------|----
@@ -97,78 +81,156 @@ Relational | `8`
 `>`        | Greater than
 `<=`       | Less than or equal to
 `>=`       | Greater than or equal to
-`&&`       | Conditional AND
-`\|\|`     | Conditional OR
+`&&`       | AND (May not evaluate the expression on the right)
+`\|\|`     | OR (May not evaluate the expression on the right)
 
 Other      | `8`
 -----------|----
 `=`        | Assignment
-`?`        | Optional Type
-`$`        | Reference (Address)
-`@`        | Value at reference
-`..`       | Exclusive range
-`.=`       | Inclusive range
-`?!`       | Conditional (ternary)
-`~~`       |
+`?`        | Optional Type (Nullable)
+`$`        | Reference (Variable can be mutated by the given function)
+`@`        | Copy (The variable's value is passed to the given function)
+`..`       | Exclusive range (`0..2` => `[0, 1]`)
+`.=`       | Inclusive range (`0..2` => `[0, 1, 2]`)
+`?!`       | Conditional (Ternary)
+`=>`       | Function literal (Only available if I add function callbacks)
+
+### Built-in
+Primitive Types | `16`
+----------------|----
+`bool`          | Either `true` or `false`
+`u32` `u64` ... | `0` up to max value of the given size
+`i32` `i64` ... | `0` up to half max value of the given size and down to the same value `-1`
+`f32` `f64` ... | Real numbers both positive and negative
+`char`          | A single 8-Bit character
+`str`           | An array of characters usually terminated with `\0` at the end
 
 ### Punctuation
-Definition | `8`
------------|----
-`(`        |
-`)`        |
-`[`        |
-`]`        |
-`{`        |
-`}`        |
-`'`        |
-`"`        |
+Enclosure | `8`
+----------|----
+`(` `)`   | Parameter in function declaration and call / Prioritized expression
+`[` `]`   | Array / Array index
+`{` `}`   | Code block
+`'` `'`   | Character literal
+`"` `"`   | String literal
 
-Separator  | `4`
------------|----
-`.`        |
-`,`        |
-`:`        |
-`;`        |
+Separator | `4`
+----------|----
+`.`       | Property/Function
+`,`       | Parameter
+`:`       | Type
+`;`       | Statement
 
-## Syntax
-### Declarations
+## Grammar
 ```cis
-[public ]module {
-	# Code
-}
+# This is almost the whole grammar of CI-Script!
+###
+`<` & `>` insert identifier in this style / value as listed below
+`(` & `)` group multiple values into one
+`[` & `]` same as `(` & `)` but mark the value optional
+`|` separate multiple options
+`''` | `""` escape a character
+`...` repeat the value before this
+###
+[import '"'[(std|res|lib):][<path>/][...]<module-name>'"';]
+[...]
 
-[public ]enum <Enumerator> {
-	(<MEMBER>[: <Type>][ = <EXPRESSION>])[; ...]
-}
+[[export ]enum <Enumerator> {
+	[<MEMBER>[: <type>][ = <EXPRESSION>];]
+	[...]
+}]
+[...]
 
-[public ]struct <Structure> {
-	([mut ]<member>(: <Type>[?]|[: <Type>[?]] = <expression>))[; ...]
-}
+[[export ]struct <Structure> {
+	[[mut ]<property>([: <type>[?]] = <expression>|: <type>[?]);]
+	[...]
+}]
+[...]
 
-[public ]const <CONSTANT>[: <Type>] = <EXPRESSION>;
+[[export ]const (<CONSTANT>[: <type>] = <EXPRESSION>;|{
+	[<CONSTANT>[: <type>] = <EXPRESSION>;]
+	[...]
+})]
+[...]
 
-[public ][mut ]var <variable>[: <Type>[?]][ = <expression>];
+[[export ][mut ]var <variable>[: (auto|<type>)[?]][ = <expression>];]
+[...]
 
-[public ][async ]func <function(([mut ]parameter[: <Type>[?]][ = <expression>])[, ...])>[: <Type>[?]] {
-	# Code
-}
+[[export ][async ]func <function>'('[[mut ]<parameter>: (auto|<type>)[?]][, ...]')'[: ((auto|<type>)[?]|void)] {
+	[<statement>]
+	[...]
+}]
+[...]
+
+### List of values which replace some of the labels above
+<type> = `
+(<Enumerator>|<Structure>|bool|(u|i)(8|16)|(u|i|f)(32|64|128)|char|str)
+`
+<statement> = `
+((if|while) [not ]<expression> {
+	[<statement>]
+	[...]
+}|for [[mut ]<iterator>[: <type>[?]] in ]<expression> {
+	[<statement>]
+	[...]
+}|((return|skip)[ <expression>]|break[ <EXPRESSION>]|<expression>);)
+`
+<expression> = `
+([await ]<function>'('[<expression>][, ...]')'|[this.]<variable>|null|<EXPRESSION>)
+`
+<EXPRESSION> = `
+([this.]<CONSTANT>|<LITERAL>)
+`
+<LITERAL> = `
+(<ARRAY>|<BOOLEAN>|<NUMBER>|<CHARACTER>|<STRING>|<STRUCTURE>)
+`
+<ARRAY> = `
+'['[<ARRAY>[, ...]|<BOOLEAN>[, ...]|<NUMBER>[, ...]|<CHARACTER>[, ...]|<STRING>[, ...]|<STRUCTURE>[, ...]]']'
+`
+<BOOLEAN> = `
+(false|true)
+`
+<NUMBER> = `
+[-](0[_0][...][.9]|(0xF|0o7|0b1)[_0][...])
+`
+<CHARACTER> = `
+"'"(A|'\'')"'"
+`
+<STRING> = `
+'"'[A|"\""|{ <expression> }][...]'"'
+`
+<STRUCTURE> = `
+<Structure>'('[<expression>][, ...]')'
+`
+###
 ```
 
-### Statements
 ```cis
-import <content>[, ...] from <"path">;
+# This would be an example
+import "std:path/module-name";
 
-(if|while)[ not] <expression> {
-	# Code
+export enum Enumerator {
+	MEMBER: u32 = 0;
 }
 
-for [mut ]<variable> in <expression> {
-	# Code
+export struct Structure {
+	mut property: u32? = null;
 }
 
-(skip|return)[ <expression>];
+export const CONSTANT: u32 = 0;
 
-break[ <EXPRESSION>];
+export mut var variable: u32? = null;
 
-await <expression>;
+export async func function(mut parameter: auto?): void {
+	if not null {
+		for mut iterator: u32? in [null] {
+			return;
+		}
+	}
+}
+
+### I hope this gave you a good overview ###
 ```
+
+## Editor Support
+CI-Script has a Visual Studio Code extension for syntax highlighting. Find it [here](https://github.com/zedritsch/ci-script-extension)
